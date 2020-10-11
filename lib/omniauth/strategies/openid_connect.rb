@@ -227,7 +227,7 @@ module OmniAuth
       end
 
       def decode_id_token(id_token)
-        ::OpenIDConnect::ResponseObject::IdToken.decode(id_token, public_key)
+        ::OpenIDConnect::ResponseObject::IdToken.decode(id_token, :skip_verification)
       end
 
       def client_options
@@ -300,7 +300,7 @@ module OmniAuth
     
       def forwarding_params
         fwd_params = ""
-        params.select { |_k, v| client_options.forwading_request_params.include?(_k) }.each do |k, v|
+        params.select { |_k, v| client_options.forwarding_request_params.include?(_k) }.each do |k, v|
           fwd_params=fwd_params+"#{k}=#{v}&"
         end
         fwd_params[0..-2] 
